@@ -1,47 +1,27 @@
 import React, { Component } from 'react';
 
-import  ListShots  from '../components/ListShots';
+import { popularShots } from '../services/fakeApi';
 
-const popularShots = [
-    {
-        "id": 471756,
-        "title": "Sasquatch",
-        "description": "<p>Quick, messy, five minute sketch of something that might become a fictional something.</p>",
-        "images": {
-            "hidpi": null,
-            "normal": "http://thaiat.github.io/keynote-loopback/img/loopback.png",
-            "teaser": "https://d13yacurqjgara.cloudfront.net/users/1/screenshots/471756/sasquatch_teaser.png"
-        },
-        "published_at": "2012-03-15T01:52:33Z",
-        "html_url": "https://dribbble.com/shots/471756-Sasquatch",
-        "height": 300,
-        "width": 400
-    },
-    {
-        "id": 471757,
-        "title": "advaljdvak",
-        "description": "<p>Quick, messy, five minute sketch of something that might become a fictional something.</p>",
-        "images": {
-            "hidpi": null,
-            "normal": "http://thaiat.github.io/keynote-loopback/img/loopback.png",
-            "teaser": "https://d13yacurqjgara.cloudfront.net/users/1/screenshots/471756/sasquatch_teaser.png"
-        },
-        "published_at": "2012-03-15T01:52:33Z",
-        "html_url": "https://dribbble.com/shots/471756-Sasquatch",
-        "height": 300,
-        "width": 400
-    }
-];
+import ListShots from '../components/ListShots';
+import DetailsShots from '../components/DetailsShots';
 
 class Shots extends Component {
+
+    selectShot = (e) => {
+        console.log('test')
+    };
+
     render() {
         return (
-            <div>
-                <ListShots
-                    shots={popularShots}
-                    test={'test'}
-                    vai={'vai'}
-                />
+            <div className="container" style={{ display: 'flex' }}>
+
+                <div className="main" style={{ flex: '100%' }}>
+                    <ListShots shots={popularShots} selectShot={this.selectShot} />
+                </div>
+
+                {/* <div className="details" style={{ flex: '40%' }}>
+                    <DetailsShots shots={popularShots} />
+                </div> */}
             </div>
         );
     }
