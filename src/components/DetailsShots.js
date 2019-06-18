@@ -1,53 +1,74 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles({
-    card: {
-        // maxWidth: 400,
-        marginTop: '10px',
-    },
-});
+import api from '../services/api';
 
-const DetailsShots = props => {
-    const classes = useStyles();
-    //console.log(props.shots)
-    return (
-        <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="200"
-                    image={props.shots.image}
-                    title="Contemplative Reptile"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-          </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-          </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-        </Button>
-                <Button size="small" color="primary">
-                    Learn More
-        </Button>
-            </CardActions>
-        </Card>
-    );
+class DetailsShots extends React.Component {
+
+    state = {
+        shot: {},
+        images: {}
+    };
+
+    componentDidMount() {
+        const id = this.props.match.params.id;
+
+        api.get(`/shots/${id}?access_token=56c09f7bf89c758e934100c0423639cdac6029de4cb92fc9e175bb93d7e7aeae`)
+            .then(res => {
+                this.setState({ shot: res.data, images: res.data.images });
+                console.log(this.state.shot)
+            })
+            .catch(err => console.log(err));
+    }
+
+    render() {
+
+        return (
+            <div>
+
+                <Button onClick={() => { this.props.history.push("/") }} variant="contained" style={{ margin: 10 }}>
+                    Voltar
+                </Button>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+                    <Card style={{ justifyContent: 'center', marginTop: 15 }} >
+                        {
+                            !this.state.shot ? <h5>Carregando...</h5> :
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        alt="Contemplative Reptile"
+                                        image={this.state.images.normal}
+                                        title={this.state.shot.title}
+                                    />
+                                    <CardContent style={{ marginTop: 100 }}>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {this.state.shot.title}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="h2">
+                                            {this.state.shot.description}
+                                        </Typography>
+                                        <Typography variant="body3" color="textSecondary" component="p">
+                                            {this.state.shot.tags}
+                                        </Typography>
+                                        <Typography variant="body4" color="textSecondary" component="p">
+                                            {this.state.shot.published_at}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                        }
+                    </Card >
+                </div>
+            </div>
+
+        );
+    }
 }
 
 export default DetailsShots;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -31,7 +31,10 @@ const ListShots = props => {
             {
                 props.shots.map(shot => {
                     return (
-                        <Card key={shot.id} onClick={() => props.selectShot} className={classes.card}>
+                        <Card
+                            onClick={() => props.selectShot(shot)}
+                            key={shot.id}
+                            className={classes.card}>
                             <CardMedia
                                 className={classes.media}
                                 image={shot.images.normal}
