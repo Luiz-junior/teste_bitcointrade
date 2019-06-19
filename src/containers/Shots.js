@@ -14,7 +14,7 @@ class Shots extends Component {
     };
 
     componentDidMount() {
-        api.get(`user/shots?access_token=56c09f7bf89c758e934100c0423639cdac6029de4cb92fc9e175bb93d7e7aeae`)
+        api.get(`user/shots?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
             .then(res => this.setState({ shots: res.data }))
             .catch(err => console.log(err));
     }

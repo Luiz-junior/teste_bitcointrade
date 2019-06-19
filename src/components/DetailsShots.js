@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 
 import api from '../services/api';
@@ -13,51 +14,61 @@ class DetailsShots extends React.Component {
 
     state = {
         shot: {},
-        images: {}
+        images: {},
+        tags: {}
     };
 
     componentDidMount() {
         const id = this.props.match.params.id;
-
-        api.get(`/shots/${id}?access_token=56c09f7bf89c758e934100c0423639cdac6029de4cb92fc9e175bb93d7e7aeae`)
+        api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
             .then(res => {
-                this.setState({ shot: res.data, images: res.data.images });
-                console.log(this.state.shot)
+                console.log(this.state.shot.value == undefined)
+                this.setState({
+                    shot: res.data,
+                    images: res.data.images,
+                    tags: res.data.tags,
+                });
+                console.log(this.state.shot.value === undefined)
+                // parei aqui
             })
             .catch(err => console.log(err));
     }
 
     render() {
-
         return (
             <div>
-
                 <Button onClick={() => { this.props.history.push("/") }} variant="contained" style={{ margin: 10 }}>
                     Voltar
                 </Button>
+
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
 
-                    <Card style={{ justifyContent: 'center', marginTop: 15 }} >
+                    <Card  >
                         {
                             !this.state.shot ? <h5>Carregando...</h5> :
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        alt="Contemplative Reptile"
                                         image={this.state.images.normal}
                                         title={this.state.shot.title}
                                     />
-                                    <CardContent style={{ marginTop: 100 }}>
+                                    <CardContent >
                                         <Typography gutterBottom variant="h5" component="h2">
                                             {this.state.shot.title}
                                         </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="h2">
+                                        <Typography variant="body2" color="textSecondary" component="p">
                                             {this.state.shot.description}
                                         </Typography>
-                                        <Typography variant="body3" color="textSecondary" component="p">
-                                            {this.state.shot.tags}
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            {/* {this.state.tags.map(tag => {
+                                                return (
+                                                    <Chip label={tag} />
+                                                )
+                                            })} */}
+                                            {/* <Chip label={this.state.shot.tags} /> */}
+
                                         </Typography>
-                                        <Typography variant="body4" color="textSecondary" component="p">
+                                        <Typography variant="body2" color="textSecondary" component="p">
                                             {this.state.shot.published_at}
                                         </Typography>
                                     </CardContent>

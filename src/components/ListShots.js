@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
         margin: '20px',
     },
     media: {
-        height: 310,
-        width: 420,
-        paddingTop: '56.25%', // 16:9
+        // height: 310,
+        // width: 420,
+        //paddingTop: '56.25%', // 16:9
     },
 
 }));
@@ -34,8 +34,10 @@ const ListShots = props => {
                         <Card
                             onClick={() => props.selectShot(shot)}
                             key={shot.id}
-                            className={classes.card}>
+                            className={classes.card}
+                        >
                             <CardMedia
+                                component="img"
                                 className={classes.media}
                                 image={shot.images.normal}
                                 title={shot.title}
