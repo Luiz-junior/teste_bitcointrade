@@ -15,7 +15,7 @@ const Header = props => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static"  style={{ background: '#444' }}>
         <Toolbar>
           <Typography variant="h6" color="inherit">
             Teste BitcoinTrade

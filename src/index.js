@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './components/Header';
-import Shots from './containers/Shots';
 import DetailsShot from './components/DetailsShots';
 
 ReactDOM.render(

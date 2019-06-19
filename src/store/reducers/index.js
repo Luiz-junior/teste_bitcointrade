@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import shotsReducer from './shotsReducer';
+
 const rootReducer = combineReducers({
-    test: {},
+    listShots: shotsReducer,
 });
 
 export default rootReducer;
