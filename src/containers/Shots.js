@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect, } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
-import api from '../services/api';
 import ListShots from '../components/ListShots';
 import { fetchShots } from '../store/actions/fetchShots';
 
@@ -12,15 +11,10 @@ class Shots extends Component {
     state = {
         renderShotDetail: false,
         idShot: null,
-        shots: [],
     };
 
     componentDidMount() {
-        api.get(`user/shots?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
-            .then(res => this.props.fetchShots(res.data))
-            .catch(err => console.log(err));
-        //const a = this.props.fetchShots()
-        //console.log('a', a)
+        this.props.fetchShots();
     }
 
     selectShot = shot => {
@@ -29,7 +23,6 @@ class Shots extends Component {
     };
 
     render() {
-        console.log(this.props)
         const shots = [...this.props.listShots.shots];
 
         if (this.state.renderShotDetail) {
