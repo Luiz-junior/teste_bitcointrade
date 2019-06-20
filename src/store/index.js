@@ -3,7 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
 import reducers from './reducers';
-import mysaga from './sagas';
+//import sagas from './sagas/index';
+import shotsSaga from './sagas/shotsSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,6 +16,6 @@ const store = createStore(
     composeEnhancers(applyMiddleware(...middlewares))
 );
 
-sagaMiddleware.run(mysaga);
+sagaMiddleware.run(shotsSaga);
 
 export default store;

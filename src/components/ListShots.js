@@ -16,11 +16,6 @@ const useStyles = makeStyles(theme => ({
         maxHeight: 310,
         margin: '20px',
     },
-    media: {
-        // height: 310,
-        // width: 420,
-        //paddingTop: '56.25%', // 16:9
-    },
 
 }));
 
@@ -40,7 +35,6 @@ const ListShots = props => {
                             <CardMedia
                                 style={{ border: '10px solid #eee' }}
                                 component="img"
-                                className={classes.media}
                                 image={shot.images.normal}
                                 title={shot.title}
                             />

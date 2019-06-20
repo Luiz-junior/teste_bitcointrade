@@ -5,10 +5,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
-// import moment from 'moment';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import api from '../services/api';
+// import api from '../services/api';
+import { fetchShotId } from '../store/actions/shotsAction';
 
 class DetailsShots extends React.Component {
 
@@ -18,16 +20,17 @@ class DetailsShots extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
-            .then(res => {
-                this.setState({ shot: res.data })
-            })
-            .catch(err => console.log(err));
+        this.props.fetchShotId(id);
+        // api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
+        //     .then(res => {
+        //         this.setState({ shot: res.data })
+        //     })
+        //     .catch(err => console.log(err));
     }
 
     render() {
         const shot = { ...this.state.shot };
-        console.log(shot);
+
         return (
             <div style={{ justifyContent: 'center' }}>
                 <Card>
@@ -93,9 +96,12 @@ class DetailsShots extends React.Component {
     }
 }
 
-DetailsShots.propTypes = {
-    id: PropTypes.string,
+// DetailsShots.propTypes = {
+//     id: PropTypes.string,
 
-}
+// }
 
-export default DetailsShots;
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ fetchShotId }, dispatch);
+
+export default connect(null, mapDispatchToProps)(DetailsShots);

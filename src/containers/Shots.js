@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 
 import ListShots from '../components/ListShots';
-import { fetchShots } from '../store/actions/fetchShots';
+import { fetchShots } from '../store/actions/shotsAction';
 
 class Shots extends Component {
 
@@ -24,9 +24,10 @@ class Shots extends Component {
 
     render() {
         const shots = [...this.props.listShots.shots];
+        const { idShot, renderShotDetail } = this.state;
 
-        if (this.state.renderShotDetail) {
-            return <Redirect to={`detail-shot/${this.state.idShot}`} />;
+        if (renderShotDetail) {
+            return <Redirect to={`detail-shot/${idShot}`} />;
         };
 
         return !shots.length ? <h5>Carregando...</h5>

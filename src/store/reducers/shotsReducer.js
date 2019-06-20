@@ -1,4 +1,4 @@
-import { FETCH_SHOTS, RECEIVE_FETCH_SHOTS } from '../actions/types';
+import { RECEIVE_FETCH_SHOTS } from '../actions/types';
 
 const INITIAL_STATE = {
     shots: []
