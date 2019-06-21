@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest, all } from 'redux-saga/effects';
 
 import api from '../../services/api';
 import { receiveFetchShots, receiveFetchShot } from '../actions/shotsAction';
@@ -53,10 +53,10 @@ function* fetchShots(action) {
 }
 
 function* rootSaga() {
-    yield [
+    yield all([
         takeLatest(FETCH_SHOTS, fetchShots),
-        takeEvery(ASYNC_FETCH_SHOT_ID, fetchShotIdApi),
-    ]
+        takeLatest(ASYNC_FETCH_SHOT_ID, fetchShotIdApi),
+    ]);
 };
 
 export default rootSaga;
