@@ -1,8 +1,13 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import api from '../../services/api';
-import { receiveFetchShots, receiveFetchShotId } from '../actions/shotsAction';
-import { FETCH_SHOTS, FETCH_SHOT_ID } from '../actions/types';
+import { receiveFetchShots, receiveFetchShot } from '../actions/shotsAction';
+import {
+    FETCH_SHOTS,
+    RECEIVE_FETCH_SHOT,
+    RECEIVE_FETCH_SHOT_ID,
+    ASYNC_FETCH_SHOT_ID,
+} from '../actions/types';
 
 const getShotsApi = async () => {
     try {
@@ -16,6 +21,7 @@ const getShotsApi = async () => {
 const getShotIdApi = async id => {
     try {
         const response = await api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`);
+        console.log("RESPONSE API", response.data)
         return response.data;
     } catch (error) {
         return error;
@@ -24,9 +30,13 @@ const getShotIdApi = async id => {
 
 function* fetchShotIdApi(action) {
     try {
-        const id = yield call(getShotIdApi);
-        yield put(receiveFetchShotId(id));
+        const shot = yield call(getShotIdApi, action.id);
+        //const shot = yield call(getShotIdApi(action.id));
+        // dentro do put posso passar uma action
+        // yield put(receiveFetchShot(shot));
+        yield put({ type: 'RECEIVE_FETCH_SHOT', shot });
     } catch (error) {
+        yield put({ type: 'ERROR' });
 
     }
 };
@@ -34,16 +44,19 @@ function* fetchShotIdApi(action) {
 function* fetchShots(action) {
     try {
         const shots = yield call(getShotsApi);
+        // dentro do put posso passar uma action
         yield put(receiveFetchShots(shots));
     } catch (error) {
-        yield put({ error });
+        yield put({ type: 'ERROR' });
+
     }
 }
 
-function* shotsSaga() {
-    yield takeLatest(FETCH_SHOTS, fetchShots);
-    yield takeLatest(FETCH_SHOT_ID, fetchShotIdApi);
+function* rootSaga() {
+    yield [
+        takeLatest(FETCH_SHOTS, fetchShots),
+        takeEvery(ASYNC_FETCH_SHOT_ID, fetchShotIdApi),
+    ]
 };
 
-
-export default shotsSaga;
+export default rootSaga;

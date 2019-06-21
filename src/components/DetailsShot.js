@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // import api from '../services/api';
-import { fetchShotId } from '../store/actions/shotsAction';
+import { receiveFetchShot, receiveFetchShotId } from '../store/actions/shotsAction';
 
 class DetailsShots extends React.Component {
 
@@ -20,7 +20,7 @@ class DetailsShots extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.props.fetchShotId(id);
+        this.props.receiveFetchShotId(id);
         // api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
         //     .then(res => {
         //         this.setState({ shot: res.data })
@@ -102,6 +102,6 @@ class DetailsShots extends React.Component {
 // }
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ fetchShotId }, dispatch);
+    bindActionCreators({ receiveFetchShot, receiveFetchShotId }, dispatch);
 
 export default connect(null, mapDispatchToProps)(DetailsShots);
