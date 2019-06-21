@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-// import api from '../services/api';
-import { receiveFetchShot, receiveFetchShotId } from '../store/actions/shotsAction';
+import { receiveFetchShotId } from '../store/actions/shotsAction';
 
 class DetailsShots extends React.Component {
 
@@ -21,15 +20,10 @@ class DetailsShots extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.receiveFetchShotId(id);
-        // api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`)
-        //     .then(res => {
-        //         this.setState({ shot: res.data })
-        //     })
-        //     .catch(err => console.log(err));
     }
 
     render() {
-        const shot = { ...this.state.shot };
+        const shot = { ...this.props.shot };
 
         return (
             <div style={{ justifyContent: 'center' }}>
@@ -96,12 +90,15 @@ class DetailsShots extends React.Component {
     }
 }
 
-// DetailsShots.propTypes = {
-//     id: PropTypes.string,
+DetailsShots.propTypes = {
+    id: PropTypes.string,
+}
 
-// }
+const mapStateToProps = state => ({
+    shot: state.listShots.shot,
+});
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ receiveFetchShot, receiveFetchShotId }, dispatch);
+    bindActionCreators({ receiveFetchShotId }, dispatch);
 
-export default connect(null, mapDispatchToProps)(DetailsShots);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsShots);
