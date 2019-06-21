@@ -1,12 +1,24 @@
-import { FETCH_SHOTS, RECEIVE_FETCH_SHOTS, FETCH_SHOT_ID, RECEIVE_FETCH_SHOT_ID } from './types';
+import {
+    FETCH_SHOTS,
+    SUCCESS_SHOTS,
+    REQUEST_SHOTS,
+    REQUEST_SHOT_ID,
+    SUCCESS_SHOT_ID,
+    ERROR,
+} from './types';
 
-export const fetchShots = () => ({ type: FETCH_SHOTS });
+export const requestShots = () => ({ type: REQUEST_SHOTS });
+export const successShots = (shots) => ({ type: SUCCESS_SHOTS, shots });
 
-export const receiveFetchShots = (shots) => ({ type: RECEIVE_FETCH_SHOTS, shots });
+export const requestShotId = (id) => ({ type: REQUEST_SHOT_ID, id });
+export const successShotId = (shot) => ({ type: SUCCESS_SHOT_ID, shot });
 
-export const fetchShotId = () => ({ type: FETCH_SHOT_ID });
+export const error = (error) => ({ type: ERROR, error });
 
-export const receiveFetchShotId = (id) => ({ type: RECEIVE_FETCH_SHOT_ID, id });
+
+
+
+
 
 
 
