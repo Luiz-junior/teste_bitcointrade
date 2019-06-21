@@ -1,22 +1,24 @@
 import {
-    RECEIVE_FETCH_SHOTS,
-    FETCH_SHOT_ID,
-    RECEIVE_FETCH_SHOT,
-    ASYNC_FETCH_SHOT_ID
+    SUCCESS_SHOTS,
+    SUCCESS_SHOT_ID,
+    ERROR,
 } from '../actions/types';
 
 const INITIAL_STATE = {
     shots: [],
     shot: {},
+    error: '',
 };
 
 export const fetchShotsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case RECEIVE_FETCH_SHOTS:
+        case SUCCESS_SHOTS:
             return { ...state, shots: action.shots }
 
-        case RECEIVE_FETCH_SHOT:
+        case SUCCESS_SHOT_ID:
             return { ...state, shot: action.shot }
+        case ERROR:
+            return { ...state, error: action.error }
         default:
             return state;
     }

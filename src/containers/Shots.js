@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 
 import ListShots from '../components/ListShots';
-import { fetchShots } from '../store/actions/shotsAction';
+import { requestShots } from '../store/actions/shotsAction';
 
 class Shots extends Component {
 
@@ -14,7 +14,7 @@ class Shots extends Component {
     };
 
     componentDidMount() {
-        this.props.fetchShots();
+        this.props.requestShots();
     }
 
     selectShot = shot => {
@@ -23,7 +23,7 @@ class Shots extends Component {
     };
 
     render() {
-        const shots = [...this.props.listShots.shots];
+        const shots = [...this.props.listShots];
         const { idShot, renderShotDetail } = this.state;
 
         if (renderShotDetail) {
@@ -45,10 +45,11 @@ class Shots extends Component {
 };
 
 const mapStateToProps = state => ({
-    listShots: state.listShots,
+    listShots: state.listShots.shots,
+    error: state.listShots.error,
 });
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ fetchShots }, dispatch);
+    bindActionCreators({ requestShots }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shots);

@@ -9,17 +9,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { receiveFetchShotId } from '../store/actions/shotsAction';
+import { requestShotId } from '../store/actions/shotsAction';
 
 class DetailsShots extends React.Component {
 
-    state = {
-        shot: {},
-    };
-
     componentDidMount() {
         const id = this.props.match.params.id;
-        this.props.receiveFetchShotId(id);
+        this.props.requestShotId(id);
     }
 
     render() {
@@ -96,9 +92,10 @@ DetailsShots.propTypes = {
 
 const mapStateToProps = state => ({
     shot: state.listShots.shot,
+    error: state.listShots.error,
 });
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ receiveFetchShotId }, dispatch);
+    bindActionCreators({ requestShotId }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsShots);

@@ -2,10 +2,11 @@ import { call, put, takeEvery, takeLatest, all } from 'redux-saga/effects';
 
 import api from '../../services/api';
 import {
-    FETCH_SHOTS,
-    RECEIVE_FETCH_SHOT,
-    RECEIVE_FETCH_SHOTS,
-    RECEIVE_FETCH_SHOT_ID,
+    REQUEST_SHOTS,
+    SUCCESS_SHOT_ID,
+    SUCCESS_SHOTS,
+    REQUEST_SHOT_ID,
+    ERROR,
 } from '../actions/types';
 
 const getShotsApi = async () => {
@@ -20,39 +21,35 @@ const getShotsApi = async () => {
 const getShotIdApi = async id => {
     try {
         const response = await api.get(`/shots/${id}?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`);
-        console.log("RESPONSE API", response.data)
         return response.data;
     } catch (error) {
         return error;
     }
 };
 
-function* fetchShotIdApi(action) {
+function* requestShotId(action) {
     try {
         const shot = yield call(getShotIdApi, action.id);
-        //const shot = yield call(getShotIdApi(action.id));
-        yield put({ type: RECEIVE_FETCH_SHOT, shot });
+        yield put({ type: SUCCESS_SHOT_ID, shot });
     } catch (error) {
-        yield put({ type: 'ERROR' });
+        yield put({ type: ERROR, error });
 
     }
 };
 
-function* fetchShots(action) {
+function* requestShots() {
     try {
         const shots = yield call(getShotsApi);
-        // dentro do put posso passar uma action
-        yield put({ type: RECEIVE_FETCH_SHOTS, shots });
+        yield put({ type: SUCCESS_SHOTS, shots });
     } catch (error) {
-        yield put({ type: 'ERROR' });
-
+        yield put({ type: ERROR, error });
     }
 }
 
 function* rootSaga() {
     yield all([
-        takeLatest(FETCH_SHOTS, fetchShots),
-        takeLatest(RECEIVE_FETCH_SHOT_ID, fetchShotIdApi),
+        takeLatest(REQUEST_SHOTS, requestShots),
+        takeLatest(REQUEST_SHOT_ID, requestShotId),
     ]);
 };
 

@@ -1,21 +1,19 @@
 import {
     FETCH_SHOTS,
-    RECEIVE_FETCH_SHOTS,
-    RECEIVE_FETCH_SHOT_ID,
-    RECEIVE_FETCH_SHOT,
-    ASYNC_FETCH_SHOT_ID,
+    SUCCESS_SHOTS,
+    REQUEST_SHOTS,
+    REQUEST_SHOT_ID,
+    SUCCESS_SHOT_ID,
+    ERROR,
 } from './types';
 
-export const fetchShots = () => ({ type: FETCH_SHOTS });
+export const requestShots = () => ({ type: REQUEST_SHOTS });
+export const successShots = (shots) => ({ type: SUCCESS_SHOTS, shots });
 
-export const receiveFetchShots = (shots) => ({ type: RECEIVE_FETCH_SHOTS, shots });
+export const requestShotId = (id) => ({ type: REQUEST_SHOT_ID, id });
+export const successShotId = (shot) => ({ type: SUCCESS_SHOT_ID, shot });
 
-export const async_fetch_shot_id = (shot) => ({ type: ASYNC_FETCH_SHOT_ID, shot });
-
-// essa action é disparada pelo component
-export const receiveFetchShotId = (id) => ({ type: RECEIVE_FETCH_SHOT_ID, id });
-
-export const receiveFetchShot = (shot) => ({ type: RECEIVE_FETCH_SHOT, shot });
+export const error = (error) => ({ type: ERROR, error });
 
 
 
