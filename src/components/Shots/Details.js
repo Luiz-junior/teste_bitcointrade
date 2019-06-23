@@ -6,6 +6,28 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+    LinkBack: {
+        display: 'flex',
+        color: '#333',
+        margin: '20px',
+        textDecoration: 'none',
+    },
+    containerCardMedia: {
+        display: 'flex',
+        maxHeight: 800,
+        maxWidth: 600,
+        margin: '0 auto',
+    },
+    containerDetails: {
+        display: 'flex',
+        background: '#eee',
+        height: '265px',
+        marginTop: '10px',
+    }
+}));
 
 const formatDate = dateString => {
     const dateParse = (Date.parse(dateString));
@@ -14,18 +36,18 @@ const formatDate = dateString => {
 };
 
 const Details = props => {
-    console.log(props.shot);
+    const classes = useStyles();
+
     return (
         <div style={{ justifyContent: 'center' }}>
             <Card>
                 {
                     <div>
-                        <Link to="/" style={{ display: 'flex', color: '#333', margin: '20px', textDecoration: 'none', }}>
+                        <Link to="/" className={classes.LinkBack}>
                             <i className="large material-icons">arrow_back</i>
                         </Link>
 
-                        <div style={{ display: 'flex', maxHeight: 800, maxWidth: 600, margin: '0 auto' }}>
-
+                        <div className={classes.containerCardMedia} >
                             <div style={{ justifyContent: 'center' }}>
                                 <Typography
                                     gutterBottom
@@ -45,7 +67,7 @@ const Details = props => {
                         </div>
                         <br />
 
-                        <div style={{ display: 'flex', background: '#eee', height: '265px', marginTop: '10px' }}>
+                        <div className={classes.containerDetails}>
                             <div style={{ maxHeight: 800, maxWidth: 600, margin: '0 auto' }}>
                                 <CardContent>
                                     <Typography
@@ -78,7 +100,6 @@ const Details = props => {
         </div>
     );
 }
-
 
 Details.propTypes = {
     id: PropTypes.string,
