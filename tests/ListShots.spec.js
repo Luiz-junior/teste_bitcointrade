@@ -1,6 +1,6 @@
-const React = require('react');
+//const React = require('react');
 //import ListShots from '../src/components/ListShots';
-const ListShots = require('../src/components/ListShots');
+//const ListShots = require('../src/components/ListShots');
 //jest.mock('../src/components/ListShots', () => 'ListShots');
 
 // const popularShots = [
@@ -34,6 +34,6 @@ const ListShots = require('../src/components/ListShots');
 //     }
 // ];
 
-test('esperado retornar todas as props', () => {
-    console.log('testando')
-});
+// test('esperado retornar todas as props', () => {
+//     console.log('testando')
+// });

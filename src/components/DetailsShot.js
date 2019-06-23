@@ -16,7 +16,15 @@ class DetailsShots extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         this.props.requestShotId(id);
-    }
+
+        String.prototype.stripHTML = function () { return this.replace(/<.*?>/g, ''); };
+    };
+
+    formatDate = dateString => {
+        const dateParse = (Date.parse(dateString));
+        const published_at = new Date(dateParse);
+        return published_at.toLocaleDateString();
+    };
 
     render() {
         const shot = { ...this.props.shot };
@@ -60,7 +68,7 @@ class DetailsShots extends React.Component {
                                                 color="textSecondary"
                                                 component="p"
                                             >
-                                                {shot.description}
+                                                {shot.description.replace(/<.*?>/g, '')}   
                                             </Typography>
                                         </CardContent>
 
@@ -72,7 +80,8 @@ class DetailsShots extends React.Component {
                                                 component="p">
 
                                                 Tags: {shot.tags.map(tag => <Chip label={tag} />)} <br /><br />
-                                                {shot.published_at}
+
+                                                Publicado em: {this.formatDate(shot.published_at)}
                                             </Typography>
                                         </CardContent>
                                     </div>
