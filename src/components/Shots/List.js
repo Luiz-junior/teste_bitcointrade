@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const ListShots = props => {
+const List = props => {
     const classes = useStyles();
 
     return (
@@ -46,9 +46,9 @@ const ListShots = props => {
     );
 }
 
-ListShots.propTypes = {
+List.propTypes = {
     shots: PropTypes.array,
     selectShot: PropTypes.func
 }
 
-export default ListShots;
+export default List;
