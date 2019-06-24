@@ -36,6 +36,7 @@ const formatDate = dateString => {
 };
 
 const Details = props => {
+
     const classes = useStyles();
 
     return (
