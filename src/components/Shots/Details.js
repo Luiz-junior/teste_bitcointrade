@@ -36,7 +36,6 @@ const formatDate = dateString => {
 };
 
 const Details = props => {
-
     const classes = useStyles();
 
     return (
@@ -85,9 +84,10 @@ const Details = props => {
                                         style={{ margin: '5px' }}
                                         variant="body2"
                                         color="textSecondary"
-                                        component="p">
+                                        component="div">
 
-                                        Tags: {props.shot.tags.map(tag => <Chip label={tag} />)} <br /><br />
+                                        Tags: {props.shot.tags.map(tag => <Chip label={tag} />)}
+                                        <br /><br />
 
                                         Publicado em: {formatDate(props.shot.published_at)}
                                     </Typography>
@@ -103,7 +103,11 @@ const Details = props => {
 }
 
 Details.propTypes = {
-    id: PropTypes.string,
+    title: PropTypes.string,
+    images: PropTypes.object,
+    description: PropTypes.string,
+    tags: PropTypes.array,
+    published_at: PropTypes.string,
 }
 
 export default Details;

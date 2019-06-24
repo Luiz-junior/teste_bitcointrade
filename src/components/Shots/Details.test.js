@@ -20,9 +20,10 @@ const shot = {
 }
 
 describe('components', () => {
-    describe('Details', () => {
-        it('Should render Details without errors', () => {
-            shallow(<Details shot={shot} />)
-        })
-    });
+    it('should have all props', () => {
+        const wrapper = shallow(<Details shot={shot} />);
+
+        expect(wrapper.find('div').length).toBe(6);
+        expect(wrapper.find('Link').length).toBe(1);
+    })
 });
