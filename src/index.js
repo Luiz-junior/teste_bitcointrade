@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Header from './components/Header';
-import DetailsShot from './components/DetailsShot';
+import DetailsShotContainer from './containers/Shots/DetailsContainer';
 import store from './store';
 
 ReactDOM.render(
@@ -15,7 +15,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Header />
             <Route exact path="/" component={App} />
-            <Route path="/detail-shot/:id" component={DetailsShot} />
+            <Route path="/detail-shot/:id" component={DetailsShotContainer} />
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));

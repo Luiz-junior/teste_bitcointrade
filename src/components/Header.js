@@ -5,25 +5,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
 });
 
 const Header = props => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static"  style={{ background: '#444' }}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit">
-            Teste BitcoinTrade
+    return (
+        <div className={classes.root}>
+            <AppBar position="static" style={{ background: '#444' }}>
+                <Toolbar>
+                    <Typography variant="h6" color="inherit">
+                        Teste BitcoinTrade
           </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
 export default Header;

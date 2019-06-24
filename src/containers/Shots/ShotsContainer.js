@@ -3,10 +3,10 @@ import { connect, } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 
-import ListShots from '../components/ListShots';
-import { requestShots } from '../store/actions/shotsAction';
+import List from '../../components/Shots/List';
+import { requestShots } from '../../store/actions/shotsAction';
 
-class Shots extends Component {
+class ShotsContainer extends Component {
 
     state = {
         renderShotDetail: false,
@@ -34,7 +34,7 @@ class Shots extends Component {
             : (
                 <div className="container" style={{ display: 'flex' }}>
                     <div className="main">
-                        <ListShots
+                        <List
                             shots={shots}
                             selectShot={this.selectShot}
                         />
@@ -52,4 +52,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ requestShots }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Shots);
+export default connect(mapStateToProps, mapDispatchToProps)(ShotsContainer);

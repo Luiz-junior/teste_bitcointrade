@@ -1,5 +1,4 @@
 import {
-    FETCH_SHOTS,
     SUCCESS_SHOTS,
     REQUEST_SHOTS,
     REQUEST_SHOT_ID,
@@ -14,6 +13,7 @@ export const requestShotId = (id) => ({ type: REQUEST_SHOT_ID, id });
 export const successShotId = (shot) => ({ type: SUCCESS_SHOT_ID, shot });
 
 export const error = (error) => ({ type: ERROR, error });
+
 
 
 
