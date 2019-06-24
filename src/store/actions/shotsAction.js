@@ -1,5 +1,4 @@
 import {
-    FETCH_SHOTS,
     SUCCESS_SHOTS,
     REQUEST_SHOTS,
     REQUEST_SHOT_ID,
